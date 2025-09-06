@@ -20,7 +20,7 @@ export default function SignupPage() {
     try {
       //send request to backend
       const res = await fetch("/api/auth/signup", {
-        method: "POST", 
+        method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ name, email, phone, password, role }),
       });
@@ -29,7 +29,7 @@ export default function SignupPage() {
 
       if (res.ok) {
         alert("Signup successful ✅");
-        router.push("/login"); // redirect to login
+        router.push("/"); // redirect to login
       } else {
         alert(data.error || "Signup failed ❌");
       }
@@ -62,6 +62,7 @@ export default function SignupPage() {
             required
             className="w-full py-1.5 px-2 rounded-md border border-slate-300 shadow-sm  bg-white outline-none"
           >
+            <option >Select</option>
             <option value="traveler" className="px-2 py-1">Traveler</option>
             <option value="hotel_owner" className="px-2 py-1">Hotel Owner</option>
             <option value="driver" className="px-2 py-1">Driver</option>

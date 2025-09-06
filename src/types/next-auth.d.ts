@@ -1,4 +1,4 @@
-import NextAuth from "next-auth";
+// Extend NextAuth types
 
 declare module "next-auth" {
   interface Session {
@@ -6,6 +6,7 @@ declare module "next-auth" {
       id?: string | null;
       name?: string | null;
       email?: string | null;  // <-- make this nullable
+      role?: string | null;
     };
   }
 
@@ -13,5 +14,14 @@ declare module "next-auth" {
     id?: string | null;
     name?: string | null;
     email?: string | null;
+    role?: string | null;
+  }
+}
+
+declare module "next-auth/jwt" {
+  interface JWT {
+    id?: string;
+    email?: string;
+    role?: string;
   }
 }

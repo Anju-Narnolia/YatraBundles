@@ -1,6 +1,7 @@
 // app/(auth)/login/page.tsx
 "use client";
 import { useRouter } from "next/navigation";
+import { signIn } from "next-auth/react";
 import { FormEvent, useState } from "react";
 import AuthCard from "@/components/AuthCard";
 
@@ -15,19 +16,18 @@ export default function LoginPage() {
     setLoading(true);
 
     try {
-      const res = await fetch("/api/auth/login", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email, password }),
+      const result = await signIn("credentials", {
+        redirect: false,
+        email,
+        password,
       });
 
-      const data = await res.json();
-      console.log("Login Response:", data);
-      if (res.ok) {
-        alert("Login successful ✅");
-        router.push("/"); // redirect to dashboard or homepage
+      if (result?.ok) {
+        alert("Login successful");
+        router.push("/");
+        router.refresh();
       } else {
-        alert(data.error || "Login failed ❌");
+        alert(result?.error || "Login failed");
       }
     } catch (error) {
       console.error(error);

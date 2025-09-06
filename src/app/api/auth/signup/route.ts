@@ -1,5 +1,4 @@
 import { NextResponse } from "next/server";
-import bcrypt from "bcryptjs";
 import dbConnect from "@/lib/dbConnect";
 import User from "@/models/user";
 import mongoose from "mongoose";
@@ -19,14 +18,11 @@ export async function POST(req: Request) {
       );
     }
 
-    // hash password
-    const hashedPassword = await bcrypt.hash(password, 10);
-
     const user = new User({
       name,
       email,
       phone,
-      password: hashedPassword,
+      password,
       role,
     });
 
