@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 import { useSession } from 'next-auth/react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { Edit, Trash2, Plus, Eye } from 'lucide-react';
+import { Edit, Trash2, Plus } from 'lucide-react';
 import Link from 'next/link';
 
 interface Service {
@@ -40,8 +40,9 @@ export default function ViewServicesPage() {
       } else {
         setError('Failed to fetch services');
       }
-    } catch (err) {
+    } catch (e) {
       setError('Error fetching services');
+      console.log(e);
     } finally {
       setLoading(false);
     }
@@ -61,6 +62,7 @@ export default function ViewServicesPage() {
         setError('Failed to delete service');
       }
     } catch (err) {
+      console.log(err);
       setError('Error deleting service');
     }
   };
@@ -79,8 +81,8 @@ export default function ViewServicesPage() {
       });
 
       if (response.ok) {
-        setServices(services.map(service => 
-          service._id === serviceId 
+        setServices(services.map(service =>
+          service._id === serviceId
             ? { ...service, isAvailable: !currentStatus }
             : service
         ));
@@ -88,6 +90,7 @@ export default function ViewServicesPage() {
         setError('Failed to update service');
       }
     } catch (err) {
+      console.log(err);
       setError('Error updating service');
     }
   };
@@ -150,11 +153,10 @@ export default function ViewServicesPage() {
               <CardHeader>
                 <div className="flex justify-between items-start">
                   <CardTitle className="text-lg">{service.name}</CardTitle>
-                  <span className={`px-2 py-1 rounded-full text-xs font-medium ${
-                    service.isAvailable 
-                      ? 'bg-green-100 text-green-800' 
+                  <span className={`px-2 py-1 rounded-full text-xs font-medium ${service.isAvailable
+                      ? 'bg-green-100 text-green-800'
                       : 'bg-red-100 text-red-800'
-                  }`}>
+                    }`}>
                     {service.isAvailable ? 'Available' : 'Unavailable'}
                   </span>
                 </div>

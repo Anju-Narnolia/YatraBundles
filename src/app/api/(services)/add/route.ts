@@ -1,19 +1,22 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { getServerSession } from 'next-auth';
-import { authOptions } from '@/app/api/auth/[...nextauth]/route';
+import { getServerSession } from 'next-auth/next';
+import type { Session } from 'next-auth';
+import { authOptions } from '@/lib/auth';
 import dbConnect from '@/lib/dbConnect';
 import Service from '@/models/service';
 
 export async function POST(request: NextRequest) {
   try {
     // Check authentication
-    const session = await getServerSession(authOptions);
-    if (!session || !session.user?.id) {
+    const session = (await getServerSession(authOptions)) as Session | null;
+    const userId = session?.user?.id ?? null;
+    if (!session || !userId) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
 
     // Check if user is a service provider
-    if (!['hotel_owner', 'driver', 'guide'].includes(session.user.role || '')) {
+    const userRole = session.user?.role || '';
+    if (!['hotel_owner', 'driver', 'guide'].includes(userRole)) {
       return NextResponse.json({ error: 'Only service providers can add services' }, { status: 403 });
     }
 
@@ -39,7 +42,7 @@ export async function POST(request: NextRequest) {
       location,
       amenities: amenities || [],
       images: images || [],
-      providerId: session.user.id,
+      providerId: userId,
     });
 
     await service.save();

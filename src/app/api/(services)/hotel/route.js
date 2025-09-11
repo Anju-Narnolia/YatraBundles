@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import cloudinary from "@/lib/cloudinary";
-import Hotel from "@/models/Hotel";
-import connectDB from "@/lib/mongodb";
+import Hotel from "@/models/hotel";
+import connectDB from "@/lib/dbConnect";
 
 export async function POST(req) {
   await connectDB();

@@ -29,7 +29,7 @@ export default function SignupPage() {
 
       if (res.ok) {
         alert("Signup successful ✅");
-        router.push("/"); // redirect to login
+        router.push("/login"); // redirect to login
       } else {
         alert(data.error || "Signup failed ❌");
       }

@@ -16,7 +16,7 @@ export default function MyTripsPage() {
 
         <div className="space-y-8">
           {myTrips.map((trip) => {
-            const Icon = trip.services[0].icon;
+            // const Icon = trip.services[0].icon;
             return (
             <Card key={trip.id} className="overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300 flex flex-col md:flex-row">
               <div className="relative h-56 md:h-auto md:w-1/3">

@@ -4,9 +4,9 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { motion, useInView } from 'framer-motion';
-import { useRef, useEffect, useState } from 'react';
+import { useRef } from 'react';
 import { Button } from '@/components/ui/button';
-import { Card, CardContent } from '@/components/ui/card';
+import { Card } from '@/components/ui/card';
 import { Handshake, Heart, ShieldCheck, Gem } from 'lucide-react';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import CountUp from 'react-countup';
@@ -35,9 +35,9 @@ const values = [
 ];
 
 const team = [
-  { name: 'Alex Johnson', title: 'Founder & CEO', image: 'https://images.unsplash.com/photo-1587135304383-a48a1da1643c?q=80&w=1964', aiHint: 'smiling person' },
-  { name: 'Maria Garcia', title: 'Head of Operations', image: 'https://images.unsplash.com/photo-1587135304383-a48a1da1643c?q=80&w=1964', aiHint: 'professional woman' },
-  { name: 'Sam Lee', title: 'Lead Developer', image: 'https://images.unsplash.com/photo-1587135304383-a48a1da1643c?q=80&w=1964', aiHint: 'tech person' },
+  { name: 'Alex Johnson', title: 'Founder & CEO', image: 'https://writestylesonline.com/wp-content/uploads/2020/01/Three-Things-To-Consider-When-Deciding-On-Your-LinkedIn-Profile-Picture-1024x1024.jpg', aiHint: 'smiling person' },
+  { name: 'Maria Garcia', title: 'Head of Operations', image: 'https://writestylesonline.com/wp-content/uploads/2020/01/Three-Things-To-Consider-When-Deciding-On-Your-LinkedIn-Profile-Picture-1024x1024.jpg', aiHint: 'professional woman' },
+  { name: 'Sam Lee', title: 'Lead Developer', image: 'https://writestylesonline.com/wp-content/uploads/2020/01/Three-Things-To-Consider-When-Deciding-On-Your-LinkedIn-Profile-Picture-1024x1024.jpg', aiHint: 'tech person' },
 ];
 
 const stats = [
@@ -243,27 +243,27 @@ export default function AboutPage() {
     );
 }
 
-// A simple CountUp component to avoid adding a new dependency for this one feature
-const CountUpClient = ({ end, duration = 2, separator = ',' }: { end: number, duration: number, separator?: string }) => {
-    const [count, setCount] = useState(0);
-    const frameRate = 1000 / 60;
-    const totalFrames = Math.round(duration * 1000 / frameRate);
+// // A simple CountUp component to avoid adding a new dependency for this one feature
+// const CountUpClient = ({ end, duration = 2 }: { end: number, duration: number }) => {
+//     const [count, setCount] = useState(0);
+//     const frameRate = 1000 / 60;
+//     const totalFrames = Math.round(duration * 1000 / frameRate);
     
-    useEffect(() => {
-        let frame = 0;
-        const counter = setInterval(() => {
-            frame++;
-            const progress = frame / totalFrames;
-            setCount(end * progress);
+//     useEffect(() => {
+//         let frame = 0;
+//         const counter = setInterval(() => {
+//             frame++;
+//             const progress = frame / totalFrames;
+//             setCount(end * progress);
 
-            if (frame === totalFrames) {
-                clearInterval(counter);
-                setCount(end);
-            }
-        }, frameRate);
+//             if (frame === totalFrames) {
+//                 clearInterval(counter);
+//                 setCount(end);
+//             }
+//         }, frameRate);
 
-        return () => clearInterval(counter);
-    }, [end, duration, frameRate, totalFrames]);
+//         return () => clearInterval(counter);
+//     }, [end, duration, frameRate, totalFrames]);
 
-    return <span>{Math.floor(count).toLocaleString()}</span>;
-};
+//     return <span>{Math.floor(count).toLocaleString()}</span>;
+// };

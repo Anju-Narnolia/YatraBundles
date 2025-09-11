@@ -14,7 +14,7 @@ export default function HeroBlock({
   subtitle: string
   ctaText: string
   ctaHref: string
-  imgSrc: string
+  imgSrc: string  
   imgAlt: string
 }) {
   return (

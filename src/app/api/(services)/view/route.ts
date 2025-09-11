@@ -1,12 +1,13 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { getServerSession } from 'next-auth';
-import { authOptions } from '@/app/api/auth/[...nextauth]/route';
+import { getServerSession } from 'next-auth/next';
+import type { Session } from 'next-auth';
+import { authOptions } from '@/lib/auth';
 import dbConnect from '@/lib/dbConnect';
 import Service from '@/models/service';
 
-export async function GET(request: NextRequest) {
+export async function GET() {
   try {
-    const session = await getServerSession(authOptions);
+    const session = await getServerSession(authOptions) as Session | null;
     if (!session || !session.user?.id) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
@@ -34,7 +35,7 @@ export async function GET(request: NextRequest) {
 
 export async function PUT(request: NextRequest) {
   try {
-    const session = await getServerSession(authOptions);
+    const session = await getServerSession(authOptions) as Session | null;
     if (!session || !session.user?.id) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
@@ -74,7 +75,7 @@ export async function PUT(request: NextRequest) {
 
 export async function DELETE(request: NextRequest) {
   try {
-    const session = await getServerSession(authOptions);
+    const session = await getServerSession(authOptions) as Session | null;
     if (!session || !session.user?.id) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }

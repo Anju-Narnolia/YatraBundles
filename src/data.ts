@@ -1,4 +1,3 @@
-import { ReactNode } from "react";
 import { Building, Utensils } from "lucide-react";
 interface DataDest {
   id: string;
