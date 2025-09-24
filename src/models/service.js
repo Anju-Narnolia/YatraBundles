@@ -9,32 +9,48 @@ const serviceSchema = new mongoose.Schema({
   type: {
     type: String,
     required: true,
-    enum: ['Hotel', 'Driver', 'Guide', 'Resort', 'Dharamshala', 'Sedan', 'SUV', 'Auto-rickshaw']
-  },
-  specialization: {
-    type: String,
-    required: true,
-    trim: true
+    enum: ['hotel', 'guide', 'driver']
   },
   price: {
     type: Number,
     required: true,
     min: 0
   },
-  description: {
+  destination: {
     type: String,
     required: true,
     trim: true
   },
-  rating: {
-    type: Number,
-    default: 0,
-    min: 0,
-    max: 5
-  },
-  location: {
+  destinationSlug: {
     type: String,
     required: true,
+    trim: true
+  },
+  phone: {
+    type: String,
+    required: true,
+    trim: true
+  },
+  available: {
+    type: Boolean,
+    default: true
+  },
+  address: {
+    type: String,
+    trim: true
+  },
+  gender: {
+    type: String,
+    enum: ['male', 'female', 'other'],
+    required: false
+  },
+  vehicle: {
+    type: String,
+    enum: ['car', 'auto', 'bike'],
+    required: false
+  },
+  image: {
+    type: String,
     trim: true
   },
   providerId: {
@@ -42,16 +58,6 @@ const serviceSchema = new mongoose.Schema({
     ref: 'User',
     required: true
   },
-  isAvailable: {
-    type: Boolean,
-    default: true
-  },
-  images: [{
-    type: String
-  }],
-  amenities: [{
-    type: String
-  }],
   createdAt: {
     type: Date,
     default: Date.now

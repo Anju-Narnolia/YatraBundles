@@ -2,10 +2,8 @@
 'use client';
 
 import Image from 'next/image';
-import Link from 'next/link';
 import { motion, useInView } from 'framer-motion';
 import { useRef } from 'react';
-import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { Handshake, Heart, ShieldCheck, Gem } from 'lucide-react';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
@@ -70,7 +68,7 @@ export default function AboutPage() {
     return (
         <div className="bg-background text-foreground">
             {/* Hero Section */}
-            <section className="relative w-full h-[60vh] flex items-center justify-center text-white">
+            <section className="relative w-full h-[35rem] flex items-center justify-center text-white">
                 <Image
                     src="https://images.unsplash.com/photo-1605379399642-870262d3d051?auto=format&fit=crop&w=1920&q=80"
                     alt="Pilgrimage crowd at a temple"
@@ -84,10 +82,10 @@ export default function AboutPage() {
                     initial="hidden"
                     animate="visible"
                     variants={fadeIn}
-                    className="relative z-10 text-center p-5 rounded-2xl bg-white/10 backdrop-blur-md border border-white/20"
+                    className="relative z-10 text-center"
                 >
-                    <h1 className="text-4xl md:text-6xl font-bold font-headline">About RoamEase</h1>
-                    <p className="mt-4 max-w-xl text-lg">
+                    <h1 className="text-4xl md:text-6xl font-bold font-headline">About YatraBundle</h1>
+                    <p className="mt-4 max-w-3xl text-xl">
                         We curate seamless, luxury travel bundles, handling every detail of your journey so you can focus on the experience, not the logistics.
                     </p>
                 </motion.div>
@@ -117,12 +115,13 @@ export default function AboutPage() {
                             </p>
                         </div>
                     </div>
-                    <div className="aspect-square relative rounded-2xl overflow-hidden shadow-lg">
+                    <div className=" overflow-hidden shadow-lg">
                         <Image
                             src="https://images.unsplash.com/photo-1605379399642-870262d3d051?auto=format&fit=crop&w=1920&q=80"
                             alt="Serene temple"
-                            layout="fill"
-                            objectFit="cover"
+                            width={800}
+                            height={400}
+                            objectFit="cover" 
                             loading="lazy"
                             data-ai-hint="serene temple"
                         />
@@ -143,9 +142,9 @@ export default function AboutPage() {
                     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
                         {values.map((value, index) => (
                             <motion.div key={index} custom={index} variants={fadeIn}>
-                                <Card className="p-8 text-center bg-background rounded-2xl hover:shadow-xl transition-shadow h-full">
+                                <Card className="p-8 text-center bg-background rounded-2xl hover:shadow-xl transition-shadow h-full border-orange-400">
                                     <div className="flex justify-center mb-4">{value.icon}</div>
-                                    <h3 className="text-xl font-bold font-headline mb-2">{value.title}</h3>
+                                    <h3 className="text-xl font-bold font-headline mb-2 text-orange-400">{value.title}</h3>
                                     <p className="text-muted-foreground">{value.description}</p>
                                 </Card>
                             </motion.div>
@@ -164,7 +163,6 @@ export default function AboutPage() {
             >
                 <h2 className="text-3xl md:text-4xl font-bold font-headline text-center mb-16">How We Curate Your Perfect Trip</h2>
                 <div className="relative">
-                    <div className="absolute left-0 right-0 top-1/2 -translate-y-1/2 h-0.5 bg-border" aria-hidden="true" />
                     <div className="relative grid grid-cols-1 md:grid-cols-4 gap-8 text-center">
                         {[
                             { title: 'Selection', description: 'We handpick top-tier accommodations and experienced local partners at each destination.' },
@@ -173,7 +171,7 @@ export default function AboutPage() {
                             { title: 'Deliver', description: 'You receive a perfectly planned itinerary, ready for you to enjoy a hassle-free journey.' },
                         ].map((step, index) => (
                             <div key={index} className="flex flex-col items-center">
-                                <div className="z-10 bg-background flex items-center justify-center w-12 h-12 rounded-full border-2 border-primary text-primary font-bold text-lg mb-4">
+                                <div className="z-10 bg-orange-400 text-white flex items-center justify-center w-12 h-12 rounded-full border-2 border-orange-500  font-bold text-lg mb-4">
                                     {index + 1}
                                 </div>
                                 <h3 className="text-xl font-bold font-headline mb-2">{step.title}</h3>
@@ -197,10 +195,10 @@ export default function AboutPage() {
                     <div className="flex flex-wrap justify-center gap-12">
                         {team.map((member, index) => (
                             <motion.div key={index} custom={index} variants={fadeIn} className="flex flex-col items-center">
-                                <Avatar className="w-24 h-24 mb-4 border-2 border-primary">
-                                    <AvatarImage src={member.image} alt={member.name} data-ai-hint={member.aiHint}/>
-                                    <AvatarFallback>{member.name.charAt(0)}</AvatarFallback>
-                                </Avatar>
+                                    <Avatar className="w-24 h-24 mb-4 border-2 border-primary">
+                                        <AvatarImage src={member.image} alt={member.name} data-ai-hint={member.aiHint}/>
+                                        <AvatarFallback>{member.name.charAt(0)}</AvatarFallback>
+                                    </Avatar>
                                 <h3 className="text-lg font-bold">{member.name}</h3>
                                 <p className="text-primary">{member.title}</p>
                             </motion.div>
@@ -235,9 +233,7 @@ export default function AboutPage() {
             >
                 <h2 className="text-3xl md:text-4xl font-bold font-headline mb-4">Ready to explore?</h2>
                 <p className="max-w-2xl mx-auto mb-8">Let us handle the details. Your next unforgettable journey is just a click away.</p>
-                <Button asChild size="lg" className="rounded-full bg-white text-primary hover:bg-white/90">
-                    <Link href="#featured-destinations">Browse Bundles</Link>
-                </Button>
+               
             </motion.section>
         </div>
     );

@@ -30,6 +30,7 @@
     "multer": "^2.0.2",
     "next": "15.4.6",
     "next-auth": "^4.24.11",
+    "razorpay": "^2.9.6",
     "react": "19.1.0",
     "react-countup": "^6.5.3",
     "react-day-picker": "^9.9.0",

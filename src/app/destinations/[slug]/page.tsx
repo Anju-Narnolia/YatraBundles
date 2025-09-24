@@ -1,239 +1,236 @@
+"use client";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Star, Bed, Car, User, DollarSign } from "lucide-react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
-import { destinations } from "@/data";
+import { useSession } from "next-auth/react";
+import { useParams } from "next/navigation";
 
-const services = {
-  hotels: [
-    {
-      name: "Ganges Grandeur",
-      rating: 4.8,
-      type: "Hotel",
-      specialization: "Luxury",
-      salePrice: 110,
-      price: 150,
-      description: "Overlooks the main ghat with luxurious, traditional decor.",
-    },
-    {
-      name: "River View Palace",
-      rating: 4.5,
-      type: "Resort",
-      specialization: "Luxury",
-      salePrice: 110,
-      price: 120,
-      description:
-        "Modern amenities with stunning morning views of the Ganges.",
-    },
-    {
-      name: "Kashi Comforts",
-      rating: 4.2,
-      type: "Dharamshala",
-      salePrice: 110,
-      specialization: "Budget",
-      price: 80,
-      description: "A budget-friendly option in the heart of the old city.",
-    },
-  ],
-  drivers: [
-    {
-      name: "City Wheels",
-      rating: 4.8,
-      type: "Sedan",
-      salePrice: 110,
-      specialization: "City Tours",
-      price: 50,
-      description: "Comfortable sedan for city tours and airport transfers.",
-    },
-    {
-      name: "Spiritual Drives",
-      rating: 4.5,
-      type: "SUV",
-      salePrice: 110,
-      specialization: "Temple Hopping",
-      price: 75,
-      description: "Spacious SUV for family travel and temple hopping.",
-    },
-    {
-      name: "Eco-Rides",
-      rating: 4.2,
-      salePrice: 110,
-      type: "Auto-rickshaw",
-      specialization: "Short Distances",
-      price: 20,
-      description:
-        "An authentic, open-air travel experience for short distances.",
-    },
-  ],
-  guides: [
-    {
-      name: "Rohan Sharma",
-      rating: 4.8,
-      salePrice: 110,
-      type: "Guide",
-      specialization: "History & Rituals",
-      price: 40,
-      description: "A scholar on Vedic traditions and the history of Varanasi.",
-    },
-    {
-      name: "Priya Singh",
-      rating: 4.5,
-      type: "Guide",
-      salePrice: 110,
-      specialization: "Food & Culture",
-      price: 35,
-      description: "Explore the culinary and cultural delights of the city.",
-    },
-    {
-      name: "Amit Kumar",
-      rating: 4.2,
-      salePrice: 110,
-      type: "Guide",
-      specialization: "Photography Tours",
-      price: 60,
-      description: "Capture the best moments of your spiritual journey.",
-    },
-  ],
-};
+interface Service {
+  _id: string;
+  name: string;
+  type: string;
+  phone: string;
+  image: string;
+  price: number;
+  destination: string;
+  address: string;
+  available: boolean;
+}
 
-const ServiceCard = ({
-
-  items,
-}: {
-  items: {
-    name: string;
-    rating: number;
-    specialization: string;
-    type: string;
-    price: number;
-    salePrice: number;
-    description: string;
-  }[];
-}) => (
+const ServiceCard = ({ items }: { items: Service[] }) => (
   <div className="grid gap-12">
-    {items.map((item) => (
-      <Link key={item.name} href={`/services/${item.name}`}>
-        <div className=" flex rounded-md hover:shadow-lg">
+    {items.length === 0 ? (
+      <p className="text-center text-gray-500">
+        No services available for this category.
+      </p>
+    ) : (
+      items.map((item) => (
+        <div key={item._id} className="flex rounded-md hover:shadow-lg border-2 ">
           <Image
-            src="/top-view-travel-kit-essentials.jpg"
+            src={item.image || "/top-view-travel-kit-essentials.jpg"}
             alt={item.name}
-            width={450}
-            height={50}
-            objectFit="cover"
+            width={350}
+            height={500}
             className="z-0 rounded-l-2xl"
             priority
           />
-          <Card className=" flex-1 rounded-r-2xl">
+          <Card className="flex-1 rounded-r-2xl bg-gray-100">
             <CardHeader className="flex flex-row justify-between items-center pb-2">
-              <CardTitle className="text-xl font-headline text-orange-500">{item.name}</CardTitle>
-              <div className="flex items-center gap-4">
-                <div className="flex items-center gap-1 text-primary">
-                  <Star className="w-5 h-5  text-yellow-500" />
-                  <span className="font-bold text-lg">
-                    {item.rating}
+              <CardTitle className="text-3xl font-headline text-orange-500 uppercase">
+                {item.name}
+              </CardTitle>
+              {item && (
+                <div className="flex font-bold text-xl items-center gap-1 text-primary"> Ratings:
+                  <Star className="w-6 h-6 text-yellow-500" />
+                  <span className="font-bold text-xl">
+                    {(Math.random() * (5 - 4) + 4).toFixed(1)}
                   </span>
                 </div>
+              )}
+            </CardHeader>
+            <CardHeader>
+              <CardTitle className="text-lg font-headline">
+                * Address: {item.address}
+              </CardTitle>
+              <div className="flex gap-1 text-lg">
+                <p className="font-bold  ">* Destination: </p>
+                {item.destination}</div>
+              <div className="flex gap-2 text-blue-700 ">
+                <p className="hover:underline font-bold text-lg">* {item.type}</p>
+              </div>
+              <div className="flex gap-2 text-gray-700 font-bold text-lg">
+                <p className="">* Contact No.: {item.phone}</p>
               </div>
             </CardHeader>
             <CardHeader>
-              <CardTitle className="text-sm font-headline">{item.description}</CardTitle>
-              <div className="flex gap-2 text-blue-700 ">
-                <p className="hover:underline"> #{item.specialization}</p>
-                <p className="hover:underline"> #{item.type} </p>
+              <div><p>A budget-friendly hotel near Taj Mahal with free WiFi and breakfast.</p>
+                <div className="flex flex-wrap gap-2 mt-2">
+                  {["Free WiFi", "Breakfast Included", "Parking", "AC Rooms", "Swimming Pool"].map((amenity, index) => (
+                    <p key={index} className="px-2  text-blue-700 hover:underline py-1 bg-gray-100 rounded-md text-sm">
+                      #{amenity}
+                    </p>
+                  ))}
+                </div>
+
               </div>
             </CardHeader>
             <CardContent className="flex justify-between items-center">
-              <div className="text-lg font-bold flex gap-2 items-center ">
-                <span className="text-red-700 flex items-center line-through">
-                  <DollarSign className="w-4 h-4 " />
-                  {" "}{item.salePrice}
-                </span>
+              <div className="text-lg font-bold flex gap-1 items-center ">
+                <p className="text-red-700 items-center line-through">${item.price + 100}</p>
                 <p className="flex text-green-700 items-center">
                   <DollarSign className="w-4 h-4" />
-                  {" "} {item.price}{" "
-                  }</p>
-                <span className="text-sm font-normal text-muted-foreground ml-1">
+                  {item.price}
+                </p>
+                <span className=" font-normal  ml-1">
                   / day
                 </span>
-                
               </div>
-              <Button>Book Now</Button>
+              <div className="flex gap-5">
+                <Button
+                  className={`${item.available
+                    ? "bg-green-800/80 hover:bg-green-800/90"
+                    : "bg-red-800/80/ hover:bg-red-800/90"
+                    } text-white`}
+                >
+                  {item.available ? "Available Now" : "Not Available"}
+                </Button>
+                <Link
+                  href={item.available ? `/bookservice/${item._id}` : "#"}
+                  passHref
+                >
+                  <Button
+                    className={`cursor-pointer ${item.available
+                      ? "bg-green-600 hover:bg-green-700"
+                      : "bg-red-600 cursor-not-allowed"
+                      } text-white`}
+                    disabled={!item.available}
+                  >
+                    {item.available ? "Book Now" : "Not Available"}
+                  </Button>
+                </Link>
+              </div>
+
             </CardContent>
           </Card>
         </div>
-      </Link>
-    ))}
-  </div>
+      ))
+    )}
+  </div >
 );
 
-export default async function DestinationDetailPage({
-  params,
-}: {
-  params: Promise<{ slug: string }>;
-}) {
-  const { slug } = await params;
-  const destination = destinations.find((d) => d.slug === slug);
+export default function DestinationDetailPage() {
+  const params = useParams(); // ✅ Use this instead of `use(params)`
+  const slug = params.slug as string;
+  const { data: session } = useSession();
+  const [services, setServices] = useState<Service[]>([]);
+  const [loading, setLoading] = useState(true);
+  useEffect(() => {
+    if (session && slug) {
+      fetchServices();
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [session, slug]);
 
-  if (!destination) {
-    return <div>Destination not found</div>;
+  const fetchServices = async () => {
+    try {
+      console.log("🔍 Fetching services for destination:", slug);
+      const response = await fetch(
+        `/api/services/by-destination?slug=${encodeURIComponent(slug)}`
+      );
+      console.log("📡 Response status:", response.status);
+
+      if (response.ok) {
+        const data = await response.json();
+        console.log("📊 Services data:", data);
+        setServices(data.services || []);
+      } else {
+        const errorData = await response.json();
+        console.warn("API Error:", errorData);
+        console.log("Failed to fetch services");
+      }
+    } catch (e) {
+      console.log("Error fetching services");
+      console.warn("Fetch error:", e);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const hotels = services.filter((s) => s.type === "hotel");
+  const drivers = services.filter((s) => s.type === "driver");
+  const guides = services.filter((s) => s.type === "guide");
+
+  if (!session) {
+    return (
+      <div className="container mx-auto px-4 py-8">
+        <div className="text-center">
+          <h1 className="text-2xl font-bold mb-4">
+            Please log in to view your services
+          </h1>
+          <Link href="/login">
+            <Button>Login</Button>
+          </Link>
+        </div>
+      </div>
+    );
+  }
+
+  if (loading) {
+    return (
+      <div className="container mx-auto px-4 py-8">
+        <div className="text-center">Loading...</div>
+      </div>
+    );
   }
 
   return (
     <div className="bg-background min-h-screen">
       <section className="relative h-[50vh]">
         <Image
-          src={destination.image}
-          alt={destination.name}
-          layout="fill"
-          objectFit="cover"
-          className="z-0"
+          src="/top-view-travel-kit-essentials.jpg"
+          alt="destination"
+          fill
+          className="object-cover z-0"
           priority
         />
         <div className="absolute inset-0 bg-slate-900/50 z-10" />
         <div className="relative z-20 flex flex-col items-center justify-center h-full text-center text-white">
           <h1 className="text-5xl font-bold font-headline">
-            {destination.name}
+            {slug.replace(/-/g, " ").replace(/\b\w/g, (l) => l.toUpperCase())}
           </h1>
         </div>
       </section>
 
       <div className="container mx-auto px-4 md:px-6 py-12">
-        <div className="max-w-4xl mx-auto">
-          <p className="text-lg text-center text-muted-foreground mb-12">
-            {destination.description}
-          </p>
+        <Tabs defaultValue="hotels" className="w-full">
+          <TabsList className="grid w-full grid-cols-3 bg-gray-200">
+            <TabsTrigger value="hotels" className="text-lg py-2.5 gap-2">
+              <Bed /> Hotels
+            </TabsTrigger>
+            <TabsTrigger value="drivers" className="text-lg py-2.5 gap-2">
+              <Car /> Drivers
+            </TabsTrigger>
+            <TabsTrigger value="guides" className="text-lg py-2.5 gap-2">
+              <User /> Guides
+            </TabsTrigger>
+          </TabsList>
 
-          <Tabs defaultValue="hotels" className="w-full">
-            <TabsList className="grid w-full grid-cols-3 bg-gray-200">
-              <TabsTrigger value="hotels" className="text-lg py-2.5 gap-2">
-                <Bed /> Hotels
-              </TabsTrigger>
-              <TabsTrigger value="drivers" className="text-lg py-2.5 gap-2">
-                <Car /> Drivers
-              </TabsTrigger>
-              <TabsTrigger value="guides" className="text-lg py-2.5 gap-2">
-                <User /> Guides
-              </TabsTrigger>
-            </TabsList>
-            <TabsContent value="hotels" className="mt-8">
-              <ServiceCard
-                items={services.hotels}
-              />
-            </TabsContent>
-            <TabsContent value="drivers" className="mt-8">
-              <ServiceCard
-                items={services.drivers}
-              />
-            </TabsContent>
-            <TabsContent value="guides" className="mt-8">
-              <ServiceCard
-                items={services.guides}
-              />
-            </TabsContent>
-          </Tabs>
-        </div>
+          <TabsContent value="hotels" className="mt-8">
+            <ServiceCard items={hotels} />
+          </TabsContent>
+
+          <TabsContent value="drivers" className="mt-8">
+            <ServiceCard items={drivers} />
+          </TabsContent>
+
+          <TabsContent value="guides" className="mt-8">
+            <ServiceCard items={guides} />
+          </TabsContent>
+        </Tabs>
       </div>
     </div>
   );

@@ -18,7 +18,7 @@ export default function HeroBlock({
   imgAlt: string
 }) {
   return (
-    <section className="relative mx-auto  overflow-hidden   shadow-xl md:py-32 lg:px-8">
+    <section className="relative mx-auto  overflow-hidden   shadow-xl md:py-32 lg:px-8 h-[35rem]">
       <Image
         src={imgSrc}
         alt={imgAlt}
