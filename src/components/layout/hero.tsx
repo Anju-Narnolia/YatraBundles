@@ -1,6 +1,5 @@
-// import Info from "../components/Infor"
-// import girl from "../asset/girl.png";
-import { GraduationCap, Info, Star } from "lucide-react";
+
+import {  Star } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 export default function Hero() {

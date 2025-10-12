@@ -64,7 +64,8 @@ export default function HomePage() {
   return (
     <div className="space-y-25">
       <Hero />
-      <section className="container mx-auto px-4 md:px-6 lg:px-16 bg-card">
+
+      <section className="container mx-auto px-4 py-5 md:px-10 lg:px-16 bg-card">
         <h2 className="text-center text-3xl font-bold">Why YatraBundles</h2>
         <div className="mt-10 grid gap-8 md:grid-cols-3">
           <FeatureCard
@@ -87,8 +88,6 @@ export default function HomePage() {
           />
         </div>
       </section>
-
-      <Separator />
 
       <div className="container mx-auto px-4 md:px-6 lg:px-16">
         <h2 className="text-center text-3xl font-bold">Explore Our Destinations</h2>

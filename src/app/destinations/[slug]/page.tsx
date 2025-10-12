@@ -8,6 +8,7 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import { useSession } from "next-auth/react";
 import { useParams } from "next/navigation";
+import { destinations } from "@/data"
 
 interface Service {
   _id: string;
@@ -123,7 +124,7 @@ const ServiceCard = ({ items }: { items: Service[] }) => (
 );
 
 export default function DestinationDetailPage() {
-  const params = useParams(); // ✅ Use this instead of `use(params)`
+  const params = useParams();
   const slug = params.slug as string;
   const { data: session } = useSession();
   const [services, setServices] = useState<Service[]>([]);
@@ -163,6 +164,7 @@ export default function DestinationDetailPage() {
   const hotels = services.filter((s) => s.type === "hotel");
   const drivers = services.filter((s) => s.type === "driver");
   const guides = services.filter((s) => s.type === "guide");
+  const destination = destinations.find((d) => d.slug === slug);
 
   if (!session) {
     return (
@@ -188,22 +190,34 @@ export default function DestinationDetailPage() {
   }
 
   return (
-    <div className="bg-background min-h-screen">
-      <section className="relative h-[50vh]">
-        <Image
-          src="/top-view-travel-kit-essentials.jpg"
-          alt="destination"
-          fill
-          className="object-cover z-0"
-          priority
-        />
-        <div className="absolute inset-0 bg-slate-900/50 z-10" />
-        <div className="relative z-20 flex flex-col items-center justify-center h-full text-center text-white">
+    <div className="bg-background ">
+      <section className="relative h-[40rem] text-black flex items-end justify-center">
+        {/* Background Image */}
+        <div className="absolute inset-0 ">
+          <Image
+            src={destination?.image || "/fallback-image.jpg"}
+            alt={destination?.name || "Destination"}
+            fill
+            className="object-cover object-center !transform-none"
+            sizes="100vw"
+            quality={100}
+            priority
+          />
+          <div className="absolute inset-0 bg-black/40" />  
+        </div>
+
+        {/* Centered Text */}
+        <div className="relative z-20 text-center text-white px-4 pb-20">
           <h1 className="text-5xl font-bold font-headline">
-            {slug.replace(/-/g, " ").replace(/\b\w/g, (l) => l.toUpperCase())}
+            {destination?.name ||
+              slug.replace(/-/g, " ").replace(/\b\w/g, (l) => l.toUpperCase())}
           </h1>
+          <p className="text-2xl font-semibold ">{destination?.description}</p>
         </div>
       </section>
+
+
+
 
       <div className="container mx-auto px-4 md:px-6 py-12">
         <Tabs defaultValue="hotels" className="w-full">
