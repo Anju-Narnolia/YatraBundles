@@ -33,7 +33,7 @@ export const destinations: DataDest[] = [
     category: "Temples",
     description: "The newly-constructed sacred abode of Lord Ram in Ayodhya.",
     image:
-      "https://images.unsplash.com/photo-1605379399642-870262d3d051?auto=format&fit=crop&w=800&q=60",
+      "/ram_mandir.jpeg",
     location: "Ayodhya, UP",
   },
   {
@@ -42,8 +42,7 @@ export const destinations: DataDest[] = [
     name: "Dashashwamedh Ghat",
     category: "Ghats",
     description: "The most vibrant ghat on the Ganges in Varanasi.",
-    image:
-      "https://images.unsplash.com/photo-1584464491033-06628f3a6b7b?auto=format&fit=crop&w=800&q=60",
+    image:"/Dashashwamedh_Ghat.jpeg",
     location: "Varanasi, UP",
   },
   {
@@ -52,8 +51,7 @@ export const destinations: DataDest[] = [
     name: "Vembanad Lake",
     category: "Lakes",
     description: "Serene backwaters and houseboats in Kerala.",
-    image:
-      "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=800&q=60",
+    image:"/Vembanad_Lake.jpeg",
     location: "Kerala",
   },
   {
@@ -63,8 +61,7 @@ export const destinations: DataDest[] = [
     category: "Beaches",
     description:
       "Pristine white sands and turquoise waters on Havelock Island.",
-    image:
-      "https://images.unsplash.com/photo-1584464491033-06628f3a6b7b?auto=format&fit=crop&w=800&q=60",
+    image:"/Radhanagar_Beach.jpeg",
     location: "Andaman & Nicobar",
   },
   {
@@ -73,8 +70,7 @@ export const destinations: DataDest[] = [
     name: "Kedarnath Peak",
     category: "Mountains",
     description: "Sacred Himalayan shrine surrounded by snow-capped peaks.",
-    image:
-      "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=800&q=60",
+    image:"/Kedarnath_Peak.jpeg",
     location: "Uttarakhand",
   },
   {
@@ -83,8 +79,7 @@ export const destinations: DataDest[] = [
     name: "Taj Mahal",
     category: "Monuments",
     description: "An eternal symbol of love and Mughal architecture.",
-    image:
-      "https://images.unsplash.com/photo-1605379399642-870262d3d051?auto=format&fit=crop&w=800&q=60",
+    image:"/Taj_Mahal.jpeg",
     location: "Agra, UP",
   },
 ];
@@ -145,3 +140,30 @@ export const destinationsData = [
   { name: "Varkala – Kerala", slug: "varkala" },
 ];
 
+export const sample = [
+  {
+    id: 1,
+    city: "Ayodhya",
+    img: "/Ayodhya.jpeg",
+    info: "2 nights stay + car pickup + certified guide",
+    alt: "Ram Mandir",
+    price: "₹4 999",
+  },
+  {
+    id: 2,
+    city: "Varanasi",
+    img: "/Varanasi.jpeg",
+    info: "2 nights stay + airport pickup + certified guide",
+
+    alt: "Ganga Aarti",
+    price: "₹5 499",
+  },
+  {
+    id: 3,
+    city: "Kedarnath",
+    img: "/Kedarnath.jpeg",
+    info: "5 nights stay + car pickup + certified guide",
+
+    alt: "Kedarnath temple",
+    price: "₹9 999",
+  }];

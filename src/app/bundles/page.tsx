@@ -1,34 +1,6 @@
 import FeatureCard from "@/components/ui/feature-card"
 import HeroBlock from "@/components/ui/hero"
-
-const sample = [
-  {
-    id: 1,
-    city: "Ayodhya",
-    img: "https://images.unsplash.com/photo-1605379399642-870262d3d051?auto=format&fit=crop&w=640&q=60",
-    info: "2 nights stay + car pickup + certified guide",
-    alt: "Ram Mandir",
-    price: "₹4 999",
-  },
-  {
-    id: 2,
-    city: "Varanasi",
-    img: "https://images.unsplash.com/photo-1584464491033-06628f3a6b7b?auto=format&fit=crop&w=640&q=60",
-    info: "2 nights stay + airport pickup + certified guide",
-
-    alt: "Ganga Aarti",
-    price: "₹5 499",
-  },
-  {
-    id: 3,
-    city: "Kedarnath",
-    img: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=640&q=60",
-    info: "5 nights stay + car pickup + certified guide",
-
-    alt: "Kedarnath temple",
-    price: "₹9 999",
-  },
-]
+import {sample} from "../../data"
 
 export default function BundlesPage() {
   return (

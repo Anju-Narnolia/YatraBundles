@@ -12,33 +12,9 @@ import Image from "next/image"
 import { useState } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import { ChevronLeft, ChevronRight } from "lucide-react"
-const sample = [
-  {
-    id: 1,
-    city: "Ayodhya",
-    img: "https://images.unsplash.com/photo-1605379399642-870262d3d051?auto=format&fit=crop&w=640&q=60",
-    info: "2 nights stay + car pickup + certified guide",
-    alt: "Ram Mandir",
-    price: "₹4 999",
-  },
-  {
-    id: 2,
-    city: "Varanasi",
-    img: "https://images.unsplash.com/photo-1584464491033-06628f3a6b7b?auto=format&fit=crop&w=640&q=60",
-    info: "2 nights stay + airport pickup + certified guide",
-
-    alt: "Ganga Aarti",
-    price: "₹5 499",
-  },
-  {
-    id: 3,
-    city: "Kedarnath",
-    img: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=640&q=60",
-    info: "5 nights stay + car pickup + certified guide",
-
-    alt: "Kedarnath temple",
-    price: "₹9 999",
-  }];
+import Hero from "@/components/layout/hero"
+import {sample} from "../data";
+ 
 
 const testimonials = [
   {
@@ -86,16 +62,8 @@ export default function HomePage() {
     testimonials[(startIndex + 1) % testimonials.length],
   ]
   return (
-    <div className="space-y-20">
-      <HeroBlock
-        title="Spiritual Journeys, Perfectly Bundled"
-        subtitle="Experience sacred destinations with our all-inclusive pilgrimage bundles. We handle the details, so you can focus on your spiritual path."
-        ctaText="Explore Bundles"
-        ctaHref="/bundles"
-        imgSrc="https://images.unsplash.com/photo-1605379399642-870262d3d051?auto=format&fit=crop&w=1920&q=80"
-        imgAlt="Ayodhya sunset"
-      />
-
+    <div className="space-y-25">
+      <Hero />
       <section className="container mx-auto px-4 md:px-6 lg:px-16 bg-card">
         <h2 className="text-center text-3xl font-bold">Why YatraBundles</h2>
         <div className="mt-10 grid gap-8 md:grid-cols-3">
@@ -136,6 +104,8 @@ export default function HomePage() {
                     src={d.image}
                     alt={d.name}
                     fill
+                    quality={100} 
+                    // sizes="(max-width: 768px) 100vw, 33vw"
                     className="object-cover transition-transform duration-300 group-hover:scale-105"
                   />
                   <Badge className="absolute top-3 left-3 bg-black/30 backdrop-blur">
