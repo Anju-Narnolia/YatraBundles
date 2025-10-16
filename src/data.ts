@@ -94,15 +94,8 @@ export const destinations: DataDest[] = [
 ];
 
 export const destinationsData = [
-  // { name: "Amritsar (Golden Temple) – Punjab", slug: "amritsar" },
-  // { name: "Badrinath – Uttarakhand", slug: "badrinath" },
   { name: "Dashashwamedh Ghat  – Varanasi, UP", slug: "dashashwamedh_ghat" },
-  // { name: "Delhi (Red Fort, Qutub Minar, India Gate) – Delhi", slug: "delhi" },
-  // { name: "Goa – Goa", slug: "goa" },
-  // { name: "Haridwar – Uttarakhand", slug: "haridwar" },
   { name: "Kedarnath – Uttarakhand", slug: "kedarnath_peak" },
-  // { name: "Lakshadweep (Agatti, Bangaram) – Lakshadweep", slug: "lakshadweep" },
-  // { name: "Manali – Himachal Pradesh", slug: "manali" },
   { name: "Radhanagar Beach – Andaman & Nicobar", slug: "radhanagar_beach" },
   { name: "Ram Mandir – Ayodhya, UP ", slug: "ram_mandir" },
   { name: "Taj Mahal (Agra Fort) – Uttar Pradesh", slug: "taj_mahal" },
