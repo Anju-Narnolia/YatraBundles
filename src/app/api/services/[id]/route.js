@@ -5,7 +5,8 @@ import Service from "@/models/service";
 export async function GET(req, { params }) {
   await dbConnect();
   try {
-    const service = await Service.findById(params.id);
+    const { id } = await params;
+    const service = await Service.findById(id);
     if (!service) {
       return NextResponse.json({ error: "Service not found" }, { status: 404 });
     }

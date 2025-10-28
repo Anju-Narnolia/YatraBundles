@@ -62,22 +62,22 @@ export default function BookServicePage() {
     specialRequest: "",
   });
 
-  useEffect(() => {
-    const fetchService = async () => {
-      try {
-        const res = await fetch(`/api/services/${id}`);
-        if (!res.ok) throw new Error("Failed to fetch service");
-        const data = await res.json();
-        setService(data.service);
-      } catch (error) {
-        console.error("Error fetching service:", error);
-      } finally {
-        setLoading(false);
-      }
-    };
+
+  const fetchService = async () => {
+    try {
+      const res = await fetch(`/api/services/${id}`);
+      if (!res.ok) throw new Error("Failed to fetch service");
+      const data = await res.json();
+      setService(data.service);
+    } catch (error) {
+      console.error("Error fetching service:", error);
+    } finally {
+      setLoading(false);
+    }
+  };
 
     if (id) fetchService();
-  }, [id]);
+  // }, [id]);
 
   const handleChange = (field: string, value: string) => {
     setPaymentData((prev) => ({ ...prev, [field]: value }));
@@ -120,7 +120,7 @@ export default function BookServicePage() {
       cvv: paymentData.cvv,
       checkIn: formattedCheckIn,
       checkOut: formattedCheckOut,
-      
+
       createdAt: new Date(),
     };
 

@@ -23,7 +23,7 @@ export default function BundlesPage() {
   useEffect(() => {
     const fetchBundles = async () => {
       try {
-        const res = await fetch("/api/bundles"); 
+        const res = await fetch("/api/bundles");
         if (!res.ok) throw new Error("Failed to fetch bundles");
         const data = await res.json();
         console.log("API response:", data);
@@ -61,15 +61,17 @@ export default function BundlesPage() {
             {bundles.map((b) => (
               <Link
                 key={b._id}
-                href={b.available ? `/bookservice/${b._id}` : "#"}
+                href={`/bookbundle/${b._id}`}
+                passHref
               >
                 <FeatureCard
                   title={`${b.city} – ₹${b.price.toLocaleString()}`}
                   description={b.info}
-                  img={b.image} 
+                  img={b.image}
                   alt={b.alt}
                 />
               </Link>
+
             ))}
           </div>
         )}
