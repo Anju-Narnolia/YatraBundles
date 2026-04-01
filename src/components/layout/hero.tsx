@@ -13,6 +13,8 @@ export default function Hero() {
                         alt="Spiritual travel background"
                         fill
                         priority
+                        loading="eager"
+                        sizes="100vw"
                     />
                     {/* Optional gradient overlay */}
                     <div className="absolute inset-0 bg-gradient-to-l from-orange-400/50 via-orange-500/20 to-orange-400/50"></div>

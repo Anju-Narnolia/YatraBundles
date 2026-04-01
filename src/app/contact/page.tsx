@@ -16,7 +16,8 @@ export default function ContactPage() {
             src="/top-view-travel-kit-essentials.jpg" // Add your premium image in /public/
             alt="Contact Background"
             fill
-
+            sizes="100vw"
+            loading="eager"
             priority
           />
           <div className="absolute inset-0 bg-black/50"></div> {/* Dark overlay for contrast */}

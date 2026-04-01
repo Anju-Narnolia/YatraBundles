@@ -72,9 +72,9 @@ export default function AboutPage() {
                 <Image
                     src="https://images.unsplash.com/photo-1605379399642-870262d3d051?auto=format&fit=crop&w=1920&q=80"
                     alt="Pilgrimage crowd at a temple"
-                    layout="fill"
-                    objectFit="cover"
-                    className="brightness-[0.6]"
+                    fill
+                    sizes="100vw"
+                    className="object-cover brightness-[0.6]"
                     priority
                     data-ai-hint="pilgrimage crowd"
                 />

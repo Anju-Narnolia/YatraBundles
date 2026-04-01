@@ -103,8 +103,9 @@ export default function HomePage() {
                     src={d.image}
                     alt={d.name}
                     fill
-                    quality={100} 
-                    // sizes="(max-width: 768px) 100vw, 33vw"
+                    // quality={100} 
+                    sizes="(max-width: 768px) 100vw, 33vw"
+                    loading="eager"
                     className="object-cover transition-transform duration-300 group-hover:scale-105"
                   />
                   <Badge className="absolute top-3 left-3 bg-black/30 backdrop-blur">

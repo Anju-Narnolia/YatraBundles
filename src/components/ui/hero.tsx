@@ -23,6 +23,7 @@ export default function HeroBlock({
         src={imgSrc}
         alt={imgAlt}
         fill
+        sizes="100vw"
         className="absolute inset-0 -z-10 h-full w-full object-cover brightness-50"
         priority
       />
